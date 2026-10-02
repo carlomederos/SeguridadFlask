@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+Inicio
+{% endblock %}
+
+{% block content %}
+
+<div class="welcome">
+    <h1>
+        Seguridad en Flask
+    </h1>
+
+    {% if current_user.is_authenticated %}
+        <p>
+            Bienvenido, {{ current_user.username }}.
+        </p>
+        <p>
+            Tu sesión se encuentra activa.
+        </p>
+    {% else %}
+        <p>
+            Práctica de autenticación, protección CSRF,
+            sesiones seguras y contraseñas protegidas.
+        </p>
+    {% endif %}
+</div>
+
+{% endblock %}

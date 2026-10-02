@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}
+Error CSRF
+{% endblock %}
+
+{% block content %}
+
+<div class="error-page">
+    <div class="error-code">
+        400
+    </div>
+    <h1>
+        Solicitud rechazada
+    </h1>
+    <p>
+        La solicitud no pudo ser validada
+        por la protección CSRF.
+    </p>
+    <p>
+        {{ reason }}
+    </p>
+    <a
+        href="{{ url_for('index') }}"
+        class="btn btn-primary"
+    >
+        Volver al inicio
+    </a>
+</div>
+
+{% endblock %}

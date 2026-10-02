@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>
+        {% block title %}
+        Seguridad Flask
+        {% endblock %}
+    </title>
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/styles.css') }}"
+    >
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <a
+            href="{{ url_for('index') }}"
+            class="logo"
+        >
+            Seguridad Flask
+        </a>
+
+        <div class="nav-links">
+            <a href="{{ url_for('index') }}">
+                Inicio
+            </a>
+
+            {% if current_user.is_authenticated %}
+                <span class="username">
+                    Hola, {{ current_user.username }}
+                </span>
+                <a href="{{ url_for('profile') }}">
+                    Mi perfil
+                </a>
+                <a href="{{ url_for('logout') }}">
+                    Cerrar sesión
+                </a>
+            {% else %}
+                <a href="{{ url_for('register') }}">
+                    Registro
+                </a>
+                <a href="{{ url_for('login') }}">
+                    Iniciar sesión
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+
+
+<main class="container">
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="message {{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    {% block content %}
+    {% endblock %}
+</main>
+</body>
+</html>
